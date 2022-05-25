@@ -11,15 +11,7 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<Category> Categories = [
-      Category(name: "dice1", image: 'assets/1.png'),
-      Category(name: "dice2", image: 'assets/2.png'),
-      Category(name: "dice3", image: 'assets/3.png'),
-      Category(name: "dice4", image: 'assets/4.png'),
-      Category(name: "dice5", image: 'assets/5.png'),
-      Category(name: "dice6", image: 'assets/6.png'),
-    ];
-    var categories;
+    
     return Scaffold(
         appBar: AppBar(
             title: Container(
@@ -40,35 +32,54 @@ const Divider(
             const SizedBox(
               height: 20,
             ),
-            Container(
-                child: Expanded(
-                    child: GridView.count(
-              crossAxisCount: 3,
-              children: List.generate(categories.length, (index) {
-                return Container(
-                  decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Image.asset(
-                        categories[index].image,
-                        height: 55,
-                      ),
-                      SizedBox(
-                        height: 20,
-                      ),
-                      Text(categories[index].name)
-                    ],
-                  ),
-                );
-              }),
-            ))),
+            CategoryGrid(),
             ]
             
           ),
         ));
+  }
+}
+
+class CategoryGrid extends StatelessWidget {
+  const CategoryGrid({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    List<Category> categories = [
+      Category(name: "dice1", image: 'assets/1.png'),
+      Category(name: "dice2", image: 'assets/2.png'),
+      Category(name: "dice3", image: 'assets/3.png'),
+      Category(name: "dice4", image: 'assets/4.png'),
+      Category(name: "dice5", image: 'assets/5.png'),
+      Category(name: "dice6", image: 'assets/6.png'),
+    ];
+    return Container(
+        child: Expanded(
+            child: GridView.count(
+      crossAxisCount: 3,
+      children: List.generate(categories.length, (index) {
+        return Container(
+          decoration: const BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10))),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(
+                categories[index].image,
+                height: 55,
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Text(categories[index].name)
+            ],
+          ),
+        );
+      }),
+    )));
   }
 }
 
